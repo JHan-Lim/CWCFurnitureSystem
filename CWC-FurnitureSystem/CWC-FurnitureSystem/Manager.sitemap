@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="Home Page"  description="Home Page">
+    <!--Order Offline-->
+    <siteMapNode url="~/Order/offline/offlineHome.aspx" title="Order Home" description="Order Home Page">
+      <siteMapNode url="~/Order/offline/addOrderOffline.aspx" title="Add Order"  description="Add Order" />
+      <siteMapNode url="~/Order/offline/searchOrderOffline.aspx" title="Search Order"  description="Search Order" />
+      <siteMapNode url="" title="Order Report"  description="Order Report">
+        <siteMapNode url="~/Order/offline/paymentReport.aspx" title="Payment Report"  description="Payment Report" />
+        <siteMapNode url="~/Order/offline/dailyReport.aspx" title="Sales Report"  description="Sales Report" />
+      </siteMapNode>
+    </siteMapNode>
+
+    <!--Product Home-->
+    <siteMapNode url="~/Product/ProductHome.aspx" title="Product Home"  description="Product Home">
+      <siteMapNode url="~/Product/Add.aspx" title="Add Product"  description="Add Product" />
+      <siteMapNode url="~/Product/Update.aspx" title="Update Product"  description="Update Product" />
+      <siteMapNode url="~/Product/Delete.aspx" title="Delete Product"  description="Delete Product" />
+      <siteMapNode url="~/Product/Return.aspx" title="Return Product"  description="Return Product" />
+      <siteMapNode url="~/Product/Restock.aspx" title="Restock Product"  description="Restock Product" />
+      <!--Product Report-->
+      <siteMapNode url="~/Product/ReportHome.aspx" title="Product Report"  description="Product Report">
+        <siteMapNode url="~/Product/Report.aspx" title="Purchase Report"  description="Purchase Report" />
+        <siteMapNode url="~/Product/ReturnReport.aspx" title="Return Report"  description="Return Report" />
+      </siteMapNode>
+    </siteMapNode>
+
+    <!--Feedback Page-->
+    <siteMapNode url="~/Feedback/FeedbackHome.aspx" title="Feedback Home"  description="Feedback Home">
+      <siteMapNode url="~/Feedback/Feedback.aspx" title="Write Feedback"  description="Write Feedback" />
+      <siteMapNode url="~/Feedback/FeedbackStaff.aspx" title="Pending Feedback"  description="Pending Feedback" />
+      <siteMapNode url="~/Feedback/ViewFeedback.aspx" title="View Feedback"  description="View Feedback" />
+      <siteMapNode url="~/Feedback/DeleteFeedback.aspx" title="Delete Feedback"  description="Delete Feedback" />
+      <siteMapNode url="~/Feedback/FeedbackReport.aspx" title="Feedback Report"  description="Feedback Report" />
+      
+      
+    </siteMapNode>
+    
+    <siteMapNode url="~/Delivery/DeliveryHome.aspx" title="Delivery Home"  description="Delivery Home">
+      <siteMapNode url="~/Delivery/Delivery.aspx" title="Add Delivery"  description="Add Delivery" />
+      <siteMapNode url="~/Delivery/ViewDelivery.aspx" title="View Delivery"  description="View Delivery" />
+      <siteMapNode url="~/Delivery/DeliveryReport.aspx" title="Delivery Report"  description="Delivery Report" />
+    </siteMapNode>
+    
+    <siteMapNode  title="Manager Profile"  description="Manager Profile">
+      <siteMapNode url="~/Home/UserProfile.aspx" title="My Profile"  description="My Profile"/>
+      <siteMapNode url="~/Home/ManagerProfile.aspx" title="Edit Staff"  description="Edit Staff"/>
+      </siteMapNode>
+    
+  </siteMapNode>
+  
+  
+</siteMap>

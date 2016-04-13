@@ -1,0 +1,36 @@
+﻿.leftTable{
+      float:left;
+      margin-right:10px;
+      border-spacing:5px;
+  }
+
+  #searchCriteria .title{
+      font-weight:bold;
+  }
+
+  .productContentDL .title{
+      font-weight:bold;
+  }
+
+  #wholeTable{
+      width:100%;
+  }
+
+  #viewProductPage{
+      width:95%;
+      margin:auto;
+      margin-top:10px;
+  }
+
+  #searchButton{
+      float:right;
+  }
+
+  .shortText{
+      width:100px;
+  }
+
+  #viewProductContent{
+      margin:auto;
+      width:90%;
+  }

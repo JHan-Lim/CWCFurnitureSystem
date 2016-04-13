@@ -1,0 +1,26 @@
+﻿
+.style{
+    float:left;
+}
+
+.form {
+    padding-left:31%;
+    padding-right:25%;
+}
+
+.formtop {
+    padding-left:43.5%;
+    padding-top:1px; 
+}
+
+.formdrop{
+    padding-left:45%;
+    padding-bottom:20px;
+
+}
+
+
+
+#addContent{
+    margin-top:10px
+}

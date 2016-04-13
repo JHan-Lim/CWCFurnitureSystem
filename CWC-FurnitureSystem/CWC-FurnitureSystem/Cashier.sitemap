@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Home Page"  description="Home Page">
+      <!--Order Offline-->
+      <siteMapNode url="~/Order/offline/offlineHome.aspx" title="Order Home Page" description="Order Home Page">
+        <siteMapNode url="~/Order/offline/addOrderOffline.aspx" title="Add Order"  description="Add Order" />
+        <siteMapNode url="~/Order/offline/searchOrderOffline.aspx" title="Search Order"  description="Search Order" />
+        <siteMapNode url="" title="Order Report"  description="Order Report">
+          <siteMapNode url="~/Order/offline/paymentReport.aspx" title="Payment Report"  description="Payment Report" />
+          <siteMapNode url="~/Order/offline/dailyReport.aspx" title="Sales Report"  description="Sales Report" />
+        </siteMapNode>
+      </siteMapNode>
+      <siteMapNode url="~/Home/UserProfile.aspx" title="My Profile"  description="My Profile"/>
+    </siteMapNode>
+  
+  
+</siteMap>

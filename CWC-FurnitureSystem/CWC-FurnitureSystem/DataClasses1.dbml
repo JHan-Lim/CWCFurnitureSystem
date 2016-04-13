@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CWC" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\CWC.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CWCConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.product" Member="products">
+    <Type Name="product">
+      <Column Name="productId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="qtyOnHand" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sellingPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="purchasePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="category" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="warranty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="url" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="product_purchaseItem" Member="purchaseItems" ThisKey="productId" OtherKey="productId" Type="purchaseItem" />
+      <Association Name="product_returnInward" Member="returnInwards" ThisKey="productId" OtherKey="productId" Type="returnInward" />
+      <Association Name="product_salesItem" Member="salesItems" ThisKey="productId" OtherKey="productId" Type="salesItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.purchaseItem" Member="purchaseItems">
+    <Type Name="purchaseItem">
+      <Column Name="purchaseId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="productId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="unitPurchasePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="totalPurchasePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="product_purchaseItem" Member="product" ThisKey="productId" OtherKey="productId" Type="product" IsForeignKey="true" />
+      <Association Name="purchaseOrder_purchaseItem" Member="purchaseOrder" ThisKey="purchaseId" OtherKey="purchaseId" Type="purchaseOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.purchaseOrder" Member="purchaseOrders">
+    <Type Name="purchaseOrder">
+      <Column Name="purchaseId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="purchaseDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="supplier" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="purchaseOrder_purchaseItem" Member="purchaseItems" ThisKey="purchaseId" OtherKey="purchaseId" Type="purchaseItem" />
+      <Association Name="supplier_purchaseOrder" Member="supplier1" ThisKey="supplier" OtherKey="supplierId" Type="supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.returnInward" Member="returnInwards">
+    <Type Name="returnInward">
+      <Column Name="returnId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="returnDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="returnStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="staff" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="salesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="productId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="product_returnInward" Member="product" ThisKey="productId" OtherKey="productId" Type="product" IsForeignKey="true" />
+      <Association Name="aspnet_User_returnInward" Member="aspnet_User" ThisKey="staff" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="salesOrder_returnInward" Member="salesOrder" ThisKey="salesId" OtherKey="salesId" Type="salesOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.supplier" Member="suppliers">
+    <Type Name="supplier">
+      <Column Name="supplierId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="supplierName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="supplierStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="companyName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="supplier_purchaseOrder" Member="purchaseOrders" ThisKey="supplierId" OtherKey="supplier" Type="purchaseOrder" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_User">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="aspnet_User_returnInward" Member="returnInwards" ThisKey="UserId" OtherKey="staff" Type="returnInward" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRole" />
+      <Association Name="aspnet_User_aspnet_Membership" Member="aspnet_Membership" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Membership" Cardinality="One" />
+      <Association Name="aspnet_User_deliverySchedule" Member="deliverySchedules" ThisKey="UserId" OtherKey="driverId" Type="deliverySchedule" />
+      <Association Name="aspnet_User_feedback" Member="feedbacks" ThisKey="UserId" OtherKey="customer" Type="feedback" />
+      <Association Name="aspnet_User_feedback1" Member="feedbacks1" ThisKey="UserId" OtherKey="manager" Type="feedback" />
+      <Association Name="aspnet_User_salesOrder" Member="salesOrders" ThisKey="UserId" OtherKey="customer" Type="salesOrder" />
+      <Association Name="aspnet_User_salesOrder1" Member="salesOrders1" ThisKey="UserId" OtherKey="staff" Type="salesOrder" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Roles" Member="aspnet_Roles">
+    <Type Name="aspnet_Role">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_UsersInRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_UsersInRoles" Member="aspnet_UsersInRoles">
+    <Type Name="aspnet_UsersInRole">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Membership" Member="aspnet_Memberships">
+    <Type Name="aspnet_Membership">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordFormat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MobilePIN" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="LoweredEmail" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordQuestion" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordAnswer" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsLockedOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastPasswordChangedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLockoutDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="aspnet_User_aspnet_Membership" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.delivery" Member="deliveries">
+    <Type Name="delivery">
+      <Column Name="deliveryId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="deliveryAddress" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="delivery_deliverySchedule" Member="deliverySchedules" ThisKey="deliveryId" OtherKey="deliveryId" Type="deliverySchedule" />
+      <Association Name="salesOrder_delivery" Member="salesOrder" ThisKey="salesId" OtherKey="salesId" Type="salesOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.deliverySchedule" Member="deliverySchedules">
+    <Type Name="deliverySchedule">
+      <Column Name="deliveryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="driverId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="deliveryDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="delivery_deliverySchedule" Member="delivery" ThisKey="deliveryId" OtherKey="deliveryId" Type="delivery" IsForeignKey="true" />
+      <Association Name="aspnet_User_deliverySchedule" Member="aspnet_User" ThisKey="driverId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.feedback" Member="feedbacks">
+    <Type Name="feedback">
+      <Column Name="feedbackId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="feedbackDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="feedbackContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="feedbackStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="replyContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="customer" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="manager" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="aspnet_User_feedback" Member="aspnet_User" ThisKey="customer" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="aspnet_User_feedback1" Member="aspnet_User1" ThisKey="manager" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.payment" Member="payments">
+    <Type Name="payment">
+      <Column Name="paymentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="paymentType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="paymentMethod" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="paymentAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="paymentDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="salesId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="salesOrder_payment" Member="salesOrder" ThisKey="salesId" OtherKey="salesId" Type="salesOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.salesItem" Member="salesItems">
+    <Type Name="salesItem">
+      <Column Name="salesId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="productId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="totalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="unitPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="product_salesItem" Member="product" ThisKey="productId" OtherKey="productId" Type="product" IsForeignKey="true" />
+      <Association Name="salesOrder_salesItem" Member="salesOrder" ThisKey="salesId" OtherKey="salesId" Type="salesOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.salesOrder" Member="salesOrders">
+    <Type Name="salesOrder">
+      <Column Name="salesId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="salesDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="salesType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="salesStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="customer" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="staff" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="salesOrder_returnInward" Member="returnInwards" ThisKey="salesId" OtherKey="salesId" Type="returnInward" />
+      <Association Name="salesOrder_delivery" Member="deliveries" ThisKey="salesId" OtherKey="salesId" Type="delivery" />
+      <Association Name="salesOrder_payment" Member="payments" ThisKey="salesId" OtherKey="salesId" Type="payment" />
+      <Association Name="salesOrder_salesItem" Member="salesItems" ThisKey="salesId" OtherKey="salesId" Type="salesItem" />
+      <Association Name="aspnet_User_salesOrder" Member="aspnet_User" ThisKey="customer" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="aspnet_User_salesOrder1" Member="aspnet_User1" ThisKey="staff" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

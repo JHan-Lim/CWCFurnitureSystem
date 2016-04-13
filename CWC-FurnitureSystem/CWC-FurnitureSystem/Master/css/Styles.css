@@ -1,0 +1,52 @@
+﻿body {
+    background-color: #EEEEEE;
+    font-family:Helvetica, Arial, sans-serif,
+}
+
+#container{
+    background-color: white;
+    width: 75%;
+    margin-left: 200px;
+    margin-right:auto;
+    
+}
+
+#topContent{
+    width: 100%;
+}
+
+#banner{
+
+}
+
+#Content{
+    min-height:500px;
+}
+
+#navigation{
+    width:200px;
+    float:left;
+    font-weight: bold;
+    background-color: gainsboro;
+    background-image: url("../images/navigation7.png");
+    color: darkblue;
+    list-style-type: none;
+    min-height:inherit;
+    position:absolute;
+    left:0px;
+}
+
+#mainContent{
+    width:100%;
+    margin:auto;
+    min-height:inherit;
+}
+
+#footer{
+    width: 100%;
+    clear:both;
+    text-align:center;
+    padding:5px 0px 5px 0px; 
+    background-color:black;
+    color:white;
+}
